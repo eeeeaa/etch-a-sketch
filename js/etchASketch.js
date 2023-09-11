@@ -19,10 +19,11 @@ const BORDER_BOX_SIZE = 1;
 const gridContainer = document.querySelector(".grid-container");
 gridContainer.style.width = `${BOARD_SIZE}px`;
 gridContainer.style.height = `${BOARD_SIZE}px`;
+const gridInput = document.querySelector(".grid-size-input");
 const genGridButton = document.querySelector(".gen-grid-button");
 genGridButton.addEventListener('click', () => {
-    let input = prompt("please input grid size");
-    if(input == null || isNaN(input)){
+    let input = gridInput.value;
+    if(input == null || isNaN(input) || input <= 0 || input >= 100){
         alert("Please input valid number!");
     } else {
         let num = Math.floor(Number(input));
@@ -60,7 +61,7 @@ function generateGrid(GRID_SIZE){
 
             grid.style.borderWidth = `${BORDER_BOX_SIZE}px`;
             grid.style.borderStyle = "solid";
-            grid.style.borderColor = "black";
+            grid.style.borderColor = "transparent";
 
             grid.addEventListener('mouseenter', () => {
                 grid.style.backgroundColor = randomizeColor();
@@ -72,3 +73,5 @@ function generateGrid(GRID_SIZE){
         gridContainer.appendChild(rowContainer);
     }
 }
+
+generateGrid(16); //Start-up grid
